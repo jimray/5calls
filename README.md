@@ -38,7 +38,11 @@ any changes are detected. You can run Gulp in this mode with:
 `gulp`
 
 This default command will also spin up an HTTP server for serving the site
-files on port `tcp/8000`.
+files on port `tcp/8000`. Load `http://localhost:8000` in your browser to see a working local copy of the site. Updates you make will be refreshed and shown automatically.
+
+The `static` directory is the root for all of the front end code. Changes you make here will be compiled by the gulp tasks automatically.
+
+The `scss` directory holds all of the Sass files (Scss style) that are compiled into CSS.
 
 The other main Gulp task is the `deploy` task, which does not watch for
 changes, and applies additional transforms on the assets -- such as an uglify
