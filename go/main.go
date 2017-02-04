@@ -89,6 +89,10 @@ func main() {
 		reloader: issueLister.(cacheReloader),
 	}
 	rh := &reportHandler{db: db}
+	if err := rh.MigrateDB(); err != nil {
+		log.Fatalf("can't run db migration on %s: %v", *dbfile, err)
+	}
+
 	// set up http routing
 	r := mux.NewRouter()
 

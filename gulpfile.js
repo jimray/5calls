@@ -12,6 +12,7 @@ var gulp = require('gulp')
   , uglify = require('gulp-uglify')
   , http_server = require('http-server')
   , connect_logger = require('connect-logger')
+  , mocha = require('gulp-mocha');
   ;
 
 var SRC = {
@@ -109,6 +110,13 @@ gulp.task('scripts:watch', function() {
 gulp.task('extra', function() {
   gulp.src(SRC.extra + '/*.+(ico|xml|json)')
     .pipe(gulp.dest(DEST.html));
+});
+
+gulp.task('test', function() {
+  return gulp.src(['**/*_test.js', '!./node_modules/**'], { read: false })
+    .pipe(mocha({
+      reporter: 'spec',
+    }));
 });
 
 gulp.task('default', ['html', 'html:watch', 'html:serve', 'sass', 'sass:watch', 'copy-images', 'copy-images:watch', 'scripts', 'scripts:watch', 'extra']);

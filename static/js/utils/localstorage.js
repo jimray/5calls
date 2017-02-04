@@ -10,21 +10,30 @@ module.exports = {
   add: (storeName, item, cb) => {
     module.exports.getAll(storeName, (items) => {
       items.push(item)
-      window.localStorage[storeName] = JSON.stringify(items)
-      cb()
+      saveStore(storeName, JSON.stringify(items), cb)
     })
   },
   replace: (storeName, index, item, cb) => {
     module.exports.getAll(storeName, (items) => {
       items[index] = item
-      window.localStorage[storeName] = JSON.stringify(items)
-      cb()
+      saveStore(storeName, JSON.stringify(items), cb)
     })
   },
   remove: (storeName, cb) => {
     module.exports.getAll(storeName, (items) => {
-      window.localStorage[storeName] = null
+      window.localStorage.removeItem(storeName)
       cb()
     })
   },
+}
+
+// handle storage quota errors
+function saveStore (storeName, storeItems, cb) {
+  try {
+    window.localStorage[storeName] = storeItems
+    cb()
+  }
+  catch (e) {
+    cb(e)
+  }
 }

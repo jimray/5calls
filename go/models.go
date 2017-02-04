@@ -21,14 +21,15 @@ func (i *Issue) String() string {
 
 // Contact is a single point of contact related to an issue
 type Contact struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Phone    string `json:"phone"`
-	PhotoURL string `json:"photoURL"`
-	Party    string `json:"party"`
-	State    string `json:"state"`
-	Reason   string `json:"reason"`
-	Area     string `json:"area"`
+	ID           string        `json:"id"`
+	Name         string        `json:"name"`
+	Phone        string        `json:"phone"` // format: "555-888-1234"
+	PhotoURL     string        `json:"photoURL"`
+	Party        string        `json:"party"`
+	State        string        `json:"state"`
+	Reason       string        `json:"reason"`
+	Area         string        `json:"area"`
+	FieldOffices []FieldOffice `json:"field_offices"`
 }
 
 func (c *Contact) String() string {
@@ -40,6 +41,7 @@ func (c *Contact) String() string {
 type LocalReps struct {
 	HouseRep *Contact   // house representative
 	Senators []*Contact // senators
+	Governor *Contact   // governor
 }
 
 // Address is a US address. It has the same structure as the normalized

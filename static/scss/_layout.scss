@@ -62,18 +62,21 @@ footer {
   color: #fff;
   padding-top: 12px;
 
-  .tinyletter__form, .colophon {
-    padding-bottom: 24px;
+  .colophon {
+    padding: 12px 0 48px 0;
+    line-height: 2em;
+    a {
+      padding: 0 12px;
+      white-space: nowrap;
+    }
   }
-
-  .colophon{
-    line-height: 1.8;
-  }
-
   a {
     color: #fff;
   }
-
+  .emailform {
+    display: inline-block;
+    white-space: nowrap;
+  }
   input[type=text] {
     width: 120px;
   }

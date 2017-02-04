@@ -8,9 +8,10 @@ import (
 )
 
 const (
-	localPlaceholder  = "LOCAL REP"
-	senatePlaceholder = "US SENATE"
-	housePlaceholder  = "US HOUSE"
+	localPlaceholder    = "LOCAL REP"
+	senatePlaceholder   = "US SENATE"
+	housePlaceholder    = "US HOUSE"
+	governorPlaceholder = "GOVERNOR"
 )
 
 type handler struct {
@@ -89,6 +90,14 @@ func (h *handler) GetIssues(w http.ResponseWriter, r *http.Request) {
 					if localReps.HouseRep != nil {
 						c := *localReps.HouseRep
 						c.Reason = "This is your local representative in the house"
+						newContacts = append(newContacts, c)
+					}
+				}
+			} else if contact.Name == governorPlaceholder {
+				if localReps != nil {
+					if localReps.Governor != nil {
+						c := *localReps.Governor
+						c.Reason = "This is your state governor"
 						newContacts = append(newContacts, c)
 					}
 				}

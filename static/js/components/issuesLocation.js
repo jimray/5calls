@@ -9,7 +9,10 @@ module.exports = (state, prev, send) => {
   `;
 
   function pretext(state) {
-    if (state.askingLocation) {
+    if (state.fetchingLocation) {
+      return html`<p class="loadingAnimation">Getting your location</p>`;
+    }
+    else if (state.askingLocation) {
       return html``;
     } else {
       if (state.address != '') {
@@ -23,7 +26,7 @@ module.exports = (state, prev, send) => {
   }
 
   function addressForm(state) {
-    const className = state.askingLocation ? '' : 'hidden';
+    const className = (state.askingLocation && !state.fetchingLocation) ? '' : 'hidden';
     return html`<p><form onsubmit=${submitAddress} class=${className}><input type="text" autofocus="true" id="address" name="address" placeholder="Enter an address or zip code" /> <button>Go</button></form></p>`
   }
 
